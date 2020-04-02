@@ -806,6 +806,8 @@ MonoBehaviour:
   PlatformPrefab: {fileID: 1367811301945011629, guid: 2b321147b35d46a4ea93e65b0c94e43f,
     type: 3}
   Floor: {fileID: 974937592}
+  WallLeft: {fileID: 1464315015}
+  WallRight: {fileID: 723825051}
   generationInterval: 2
 --- !u!1 &2023062616
 GameObject:
