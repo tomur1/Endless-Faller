@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private string gameScene;
 
+    private void Awake()
+    {
+        Object.DontDestroyOnLoad(this);
+    }
+
     public void Play()
     {
         StartCoroutine(LoadScene(gameScene));
