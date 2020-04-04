@@ -7,6 +7,8 @@ public class MainCharacter : MonoBehaviour
     public GameObject LevelManager;
     [SerializeField] private float speed;
     LevelManager ManagerScript;
+    public GameObject topBorder;
+    public GameObject bottomBorder;
 
     void Start()
     {
@@ -23,11 +25,18 @@ public class MainCharacter : MonoBehaviour
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
+
+        //check if player failed
+        if (GameManager.managerInstance.currentState == GameManager.GameState.Gameplay &&
+            (transform.position.y > topBorder.transform.position.y || transform.position.y < bottomBorder.transform.position.y))
+        {
+            ManagerScript.GameOver();
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.tag);
         if (collision.collider.tag.Equals("Platform"))
         {
             MovingPlatform platform = collision.collider.GetComponentInParent<MovingPlatform>();

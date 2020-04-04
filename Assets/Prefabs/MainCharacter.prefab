@@ -124,3 +124,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelManager: {fileID: 0}
   speed: 5
+  topBorder: {fileID: 0}
+  bottomBorder: {fileID: 0}
