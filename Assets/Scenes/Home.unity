@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: Game
+  menuScene: Home
 --- !u!4 &389219362
 Transform:
   m_ObjectHideFlags: 0

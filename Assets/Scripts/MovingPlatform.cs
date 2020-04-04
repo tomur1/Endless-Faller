@@ -19,7 +19,7 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.up * speed;
+        transform.position += Vector3.up * speed * Time.deltaTime;
 
         if (topBorder.transform.position.y + offsetY < transform.position.y)
         {

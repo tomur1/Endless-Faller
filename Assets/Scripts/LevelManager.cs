@@ -8,15 +8,44 @@ public class LevelManager : MonoBehaviour
 {
     public Text CurrentScoreText;
     public int Score { get; private set; }
-    
+    public GameObject PauseMenuPanel;
+    public GameManager gameManager;
+
     void Start()
     {
-        
+        gameManager = GameObject.Find("Manager").GetComponent<GameManager>();
     }
 
     void Update()
     {
+        bool escPressed = Input.GetKey(KeyCode.Escape);
         
+        if (escPressed && gameManager.currnetState == GameManager.GameState.Gameplay)
+        {
+            //Stop time and show pause menu
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        PauseMenuPanel.SetActive(true);
+        gameManager.PauseGame();
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+        PauseMenuPanel.SetActive(false);
+        gameManager.ResumeGame();
+    }
+
+    public void GoToHomeMenu()
+    {
+        //need to resume the game to actually go back
+        gameManager.GoToHomeMenu();
+        Time.timeScale = 1.0f;
     }
 
     public void IncrementScore()
