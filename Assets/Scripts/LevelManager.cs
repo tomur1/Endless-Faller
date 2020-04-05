@@ -71,7 +71,6 @@ public class LevelManager : MonoBehaviour
         EndMenuPanel.SetActive(false);
         PauseMenuPanel.SetActive(false);
         gameManager.highscore = HighScore;
-        //need to resume the game to actually go back
         
         gameManager.GoToHomeMenu();
     }

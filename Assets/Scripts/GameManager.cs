@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager managerInstance;
+    public LevelFader levelFader;
     //used for showing score in main menu
     public int highscore;
 
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
     {
+        
         //if the home has been loaded set the highscore text
         if (loadedScene.name == "Home")
         {
@@ -82,8 +84,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator LoadScene(string sceneName)
     {
         Debug.Log("Loading game!");
-        yield return new WaitForSeconds(.4f);
+        levelFader.FadeIn();
+        yield return new WaitUntil(() => levelFader.fadedIn);
         SceneManager.LoadScene(sceneName);
+        levelFader.FadeOut();
     }
 
 }
