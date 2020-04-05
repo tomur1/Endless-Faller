@@ -4,6 +4,7 @@ public class MovingPlatform : MonoBehaviour
 {
     private GameObject topBorder;
     [SerializeField] private float speed;
+    public float Speed { get => speed; set => speed = value; }
     public bool beenHit { get; private set; }
     //Platforms are visible longer than the player so we have to destroy them later.
     //How much later is controlled by this offset
@@ -19,7 +20,7 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.up * speed * Time.deltaTime;
+        transform.position += Vector3.up * Speed * Time.deltaTime;
 
         if (topBorder.transform.position.y + offsetY < transform.position.y)
         {

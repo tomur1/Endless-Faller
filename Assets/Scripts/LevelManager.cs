@@ -86,6 +86,7 @@ public class LevelManager : MonoBehaviour
     public void Reset()
     {
         Score = 0;
+        CurrentScoreText.text = "Score: " + Score;
         EndMenuPanel.SetActive(false);
         //Well, reloading the scene would be the easiest. But hey! Bonus points!
         foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
