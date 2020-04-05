@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
         SceneManager.sceneLoaded += OnSceneLoad;
         Object.DontDestroyOnLoad(gameObject);
+        highscore = SaverLoader.Load();
         currentState = GameState.HomeMenu;
     }
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(LoadScene(menuScene));
         currentState = GameState.HomeMenu;
+        SaveGame();
     }
 
     public void PauseGame()
@@ -60,6 +62,11 @@ public class GameManager : MonoBehaviour
     public void ResumeGame()
     {
         currentState = GameState.Gameplay;
+    }
+
+    public void SaveGame()
+    {
+        SaverLoader.Save(highscore);
     }
 
     private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)

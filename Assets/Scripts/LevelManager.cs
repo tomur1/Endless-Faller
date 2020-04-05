@@ -80,7 +80,6 @@ public class LevelManager : MonoBehaviour
     {
         Score++;
         CurrentScoreText.text = "Score: " + Score;
-        Debug.Log(Score);
     }
 
     public void Reset()

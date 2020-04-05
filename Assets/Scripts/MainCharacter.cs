@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
-    public GameObject LevelManager;
     [SerializeField] private float speed;
+
+    public GameObject LevelManager;
     LevelManager ManagerScript;
     public GameObject topBorder;
     public GameObject bottomBorder;
