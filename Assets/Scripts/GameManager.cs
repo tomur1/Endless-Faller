@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -36,9 +37,19 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.sceneLoaded += OnSceneLoad;
-        Object.DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
         highscore = SaverLoader.Load();
         currentState = GameState.HomeMenu;
+        CheckIfInitaialValuesExists();
+    }
+
+    //if the initial values don't exists it will crash the application so in that case we want to create some default ones.
+    private void CheckIfInitaialValuesExists()
+    {
+        if (!SaverLoader.InitialValuesExist())
+        {
+            SaverLoader.SaveStartingValues(new Vector3(0, 5, 0), 2);
+        }
     }
 
     public void Play()

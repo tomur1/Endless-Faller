@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
 /// <summary> Manages the state of the level </summary>
 public class LevelManager : MonoBehaviour
@@ -19,6 +21,13 @@ public class LevelManager : MonoBehaviour
     {
         gameManager = GameManager.managerInstance;
         HighScore = gameManager.highscore;
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Start()
+    {
+        LoadStartingValuesFromJSON();
+        SetUpPlayer();
     }
 
     void Update()
@@ -32,8 +41,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void LoadStartingValuesFromJSON()
+    {
+        InitialPreferences initialPreferences = SaverLoader.LoadStartingValues();
+        PlayerStartingPoint = initialPreferences.initialPlayerPosition;
+    }
+
     public void GameOver()
     {
+        
         TMPro.TextMeshProUGUI ScoreText = EndMenuPanel.transform.Find("ScoreText").GetComponent<TMPro.TextMeshProUGUI>();
         TMPro.TextMeshProUGUI HighscoreText = EndMenuPanel.transform.Find("HighscoreText").GetComponent<TMPro.TextMeshProUGUI>();
         if (Score > HighScore)
@@ -81,18 +97,27 @@ public class LevelManager : MonoBehaviour
         CurrentScoreText.text = "Score: " + Score;
     }
 
+    private void SetUpPlayer()
+    {
+        Player.transform.position = PlayerStartingPoint;
+        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+
     public void Reset()
     {
         Score = 0;
         CurrentScoreText.text = "Score: " + Score;
-        EndMenuPanel.SetActive(false);
+        if (EndMenuPanel != null)
+        {
+            EndMenuPanel.SetActive(false);
+        }
+        
         //Well, reloading the scene would be the easiest. But hey! Bonus points!
         foreach (GameObject platform in GameObject.FindGameObjectsWithTag("Platform"))
         {
             Destroy(platform);
         }
-        Player.transform.position = PlayerStartingPoint;
-        Player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        SetUpPlayer();
         GetComponent<PlatformGenerator>().ResetGeneration();
         Time.timeScale = 1.0f;
     }

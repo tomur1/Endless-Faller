@@ -3,15 +3,18 @@
 public class MovingPlatform : MonoBehaviour
 {
     private GameObject topBorder;
-    [SerializeField] private float speed;
-    public float Speed { get => speed; set => speed = value; }
+    public float speed;
     public bool beenHit { get; private set; }
+    public float Speed { get => speed; set => speed = value; }
+
     //Platforms are visible longer than the player so we have to destroy them later.
     //How much later is controlled by this offset
     public float offsetY;
 
     void Start()
     {
+        //for tests
+        Speed = 2f;
         beenHit = false;
         //Not the mose efficient but it's called only one per object. Also this game doesn't have a lot of objects
         topBorder = GameObject.Find("TopBorder");
