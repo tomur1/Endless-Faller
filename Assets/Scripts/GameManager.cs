@@ -81,6 +81,11 @@ public class GameManager : MonoBehaviour
         SaverLoader.Save(highscore);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     private void OnSceneLoad(Scene loadedScene, LoadSceneMode mode)
     {
         
